@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+</style>
+
+<script type="text/javascript"
+    src="https://maps.google.com/maps/api/js?sensor=false">
+</script>
+
+<script type="text/javascript">
+	var marker;
+
+	// create the map using the latitude and longitude values
+	function initialize() {
+		var latlng = new google.maps.LatLng({{record.latitude}}, {{record.longitude}});
+		var mapOptions = {
+			zoom: 14,
+	  		center: latlng,
+	  		mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+		marker = new google.maps.Marker({
+			position: latlng, 
+			map: map,
+			animation: google.maps.Animation.DROP,
+			title:"IP ({{ip}})"
+		});
+		
+		var contentString = ('<div id="content">'+
+			'<div id="siteNotice">'+
+			'</div>'+
+			'<h2 id="ip_address">IP: {{ip}}</h2>'+
+			'<div id="bodyContent">'+
+			'<ul>'+
+			'<li><b>Cidade:</b> {{record.city}}</li>'+
+			'<li><b>País:</b> {{record.country_name}}</li>'+
+			'<li><b>Latitude:</b> {{record.latitude}}</li>'+
+			'<li><b>Longitude:</b> {{record.longitude}}</li>'+
+			'</ul>'+
+			'</div>'+
+			'</div>');
+
+		var info_window = new google.maps.InfoWindow({
+			content: contentString
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+				      info_window.open(map, marker);
+		});
+	}	
+</script>
+</head>
+
+<body onload="initialize()">
+	<div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+</html>

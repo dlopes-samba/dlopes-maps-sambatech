@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC 
+	"-//W3C//DTD HTML 4.01 Transitional//EN" 
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Usando a API do Google Maps</title>
+	</head>
+
+	<body>
+		<h1>Seleção Sambatech - Problema 2</h1>
+		<p>Carlos Eduardo Rodrigues Lopes - <a href="mailto:dlopes@gmail.com">dlopes@gmail.com</a><br></p>
+		<p>Informe um endereço de IP para geo-localização:<br></p>
+
+		<div>
+		<form action="/mapsapp/geoip/" method="post">
+    		<input type="text" name="ip" id="ip" size="45" />
+			<input type="submit" value="Geo-localizar" />
+		</form>
+		</div>
+
+		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+	</body>
+</html>
